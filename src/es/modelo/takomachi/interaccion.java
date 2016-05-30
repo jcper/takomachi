@@ -1,4 +1,4 @@
-package es.takomachi;
+package es.modelo.takomachi;
 
 public interface interaccion {
 	

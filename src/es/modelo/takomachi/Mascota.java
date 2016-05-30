@@ -1,6 +1,6 @@
-package es.takomachi;
+package es.modelo.takomachi;
 
-public class Mascota implements interaccion {
+public class Mascota {
 	
     private   String  nombre;                       
     private   int     peso;                        
@@ -68,28 +68,5 @@ public class Mascota implements interaccion {
     }
     
     
-	@Override
-	public void DarComer(String comida) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void PonerRopa(String Ropa) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void QuitarRopa(String Ropa) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void Moverse(int x) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
