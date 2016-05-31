@@ -1,15 +1,15 @@
-package es.modelo.takomachi;
+package es.takomachi.modelo;
 
-public class Perro extends Mascota implements interaccion{
+public class Gato extends Mascota implements interaccion{
 
-	public Perro(String Nombre) {
+	public Gato(String Nombre) {
 		super(Nombre);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void DarComer(String comida) {
-		if (comida.equals("Carne")){
+		if (comida.equals("Leche")){
 		 this.SetPeso(this.getPeso()+10);
 		}
 	}
@@ -44,5 +44,7 @@ public class Perro extends Mascota implements interaccion{
 	   this.SetPosicion(this.getPosicion()+x);
 		
 	}
+
+	
 
 }

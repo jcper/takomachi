@@ -1,4 +1,4 @@
-package es.modelo.takomachi;
+package es.takomachi.modelo;
 
 public class Mascota {
 	

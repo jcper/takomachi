@@ -1,4 +1,4 @@
-package es.modelo.takomachi;
+package es.takomachi.modelo;
 
 public class Foca extends Mascota implements interaccion{
   public Foca(String Nombre) {
