@@ -49,6 +49,7 @@ public class pantalla extends JFrame  {
    Mover=new JLabel("MOVER EJE X");
   
    energia=new JProgressBar();
+   energia.setString("ENERGIA 100%");
    energia.setValue(100);
    energia.setStringPainted(true);
    nombre=new JTextField("nombre",10);
