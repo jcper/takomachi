@@ -85,7 +85,8 @@ public class pantalla extends JFrame  {
    cargar=new JButton("Cargar Juego");
    guardar=new JButton("Guardar Juego");
    salir=new JButton("Salir Juego");
-   interaccion=new JButton("interaccion");
+   interaccion=new JButton("EJECUTAR INTERACCION");
+   interaccion.setBackground(Color.cyan);
    JFrame ventana = new JFrame("Pantalla");
    JPanel Pestado=new JPanel(new FlowLayout(FlowLayout.CENTER,120,10));
      Pestado.add(temperatura);
