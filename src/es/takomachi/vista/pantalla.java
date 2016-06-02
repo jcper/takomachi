@@ -2,14 +2,17 @@ package es.takomachi.vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 
 
-public class pantalla extends JFrame  {
+public class pantalla extends JFrame implements ActionListener {
 	
 	static private JLabel temperatura;
 	static private JProgressBar energia;
@@ -83,8 +86,11 @@ public class pantalla extends JFrame  {
    mover.setPaintTicks(true);
    mover.setPaintLabels(true);
    cargar=new JButton("Cargar Juego");
+   cargar.addActionListener(this);//Le añado el mismo evento con el operador this.
    guardar=new JButton("Guardar Juego");
+   guardar.addActionListener(this);//Le añado el mismo evento con el operador this.
    salir=new JButton("Salir Juego");
+   salir.addActionListener(this);//Le añado el mismo evento con el operador this.
    interaccion=new JButton("EJECUTAR INTERACCION");
    interaccion.setBackground(Color.cyan);
    JFrame ventana = new JFrame("Pantalla");
@@ -141,11 +147,44 @@ public class pantalla extends JFrame  {
 		ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		ventana.setVisible(true);
     }
+
+    /***
+     *Con un mismo oyente manejo varias fuentes
+     *como los botones cargar, guardar y salir 
+     * 
+     */
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		Object fuente=e.getSource();
+		 JFrame miventana = new JFrame("Panel");
+		if(fuente==cargar){
+			
+		JOptionPane.showMessageDialog(miventana, "He manejado un evento de forma exitosa!!", "Titulo cargar juego",
+		                 JOptionPane.WARNING_MESSAGE);
+			
+			
+		}else if(fuente==guardar){
+			
+			JOptionPane.showMessageDialog(miventana, "He manejado un evento de forma exitosa!!", "Titulo guardar juego",
+	                 JOptionPane.WARNING_MESSAGE);
+			
+		}else if(fuente==salir){
+			
+			JOptionPane.showMessageDialog(miventana, "He manejado un evento de forma exitosa!!", "Titulo salir juego",
+	                 JOptionPane.WARNING_MESSAGE);
+			
+		}else{
+			
+			JOptionPane.showMessageDialog(miventana, "No he manejado un evento de forma exitosa!!", "Titulo error",
+	                 JOptionPane.WARNING_MESSAGE);
+			
+		}
+		
+		
+	}
     
     
     
-    
-    
-    
-	
 }
