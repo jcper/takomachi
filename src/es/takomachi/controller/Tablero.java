@@ -13,19 +13,34 @@ public class Tablero implements ActionListener{
 	private static Foca foca;
 	private static Gato gato;
 	private static Perro perro;
-	private static String nombre;
 	private static String comida;
-	private static String mascota;
-	private static int temperatura;
+	private static double temperatura;
+	private static int mover;
+	private static int energia;
 	private static String ropa;
-	 public Tablero(){
+	 public Tablero(String nombre, String mascota){
 	  timer=new Timer(40,this);
+	  if(mascota.equals("foca")){
 	  setFoca(new Foca(nombre));
-	  setGato(new Gato(nombre));
-	  setGato(new Gato(nombre));
+	  temperatura=foca.getTemperatura();
+	  setEnergia(foca.getEnergia());
+	  setMover(foca.getPosicion());
+	  }
+	  if(mascota.equals("perro")){
+		  setPerro(new Perro(nombre));
+		  temperatura=perro.getTemperatura();
+		  setEnergia(perro.getEnergia());
+		  setMover(perro.getPosicion());
+	   }
+	  if(mascota.equals("gato")){
+		 setGato(new Gato(nombre));
+		  temperatura=gato.getTemperatura();
+		  setEnergia(gato.getEnergia());
+		  setMover(gato.getPosicion());
+	  }
 	  comida="";
 	  ropa="";
-	  temperatura=19;
+	
 	 }
 
 	 
@@ -39,40 +54,18 @@ public class Tablero implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(!comida.equals("") && mascota.equals("foca")){
-		foca.DarComer(comida);
-		
+		if(!comida.equals("") ){
+		  foca.DarComer(comida);
+		  gato.DarComer(comida);
+		  perro.DarComer(comida);
+		}
 		if(temperatura <=19){
 		foca.PonerRopa(ropa);
-		
-		}else{
-			foca.SetPeso(foca.getPeso()-1);
-			foca.SetEnergia(foca.getEnergia()-1);
-		  }
-		}
-		if(!comida.equals("") && mascota.equals("gato")){
-		  gato.DarComer(comida);
-		  
-		  if(temperatura <=19){
-	      gato.PonerRopa(ropa);
-		}else{
-		 gato.SetPeso(gato.getPeso()-1);
-		 gato.SetEnergia(gato.getEnergia()-1);
-		  }
-		}
-		if(!comida.equals("") && mascota.equals("perro")){
-		perro.DarComer(comida);
-		if(temperatura <=19){
+		gato.PonerRopa(ropa);
 		perro.PonerRopa(ropa);
-		
-		}else{
-		perro.SetPeso(perro.getPeso()-1);
-		perro.SetEnergia(perro.getEnergia()-1);
-		 }
 		}
-		
-	}
-
+		reiniciarInteraccion();
+	 }
 
 	public static Perro getPerro() {
 		return perro;
@@ -104,14 +97,26 @@ public class Tablero implements ActionListener{
 	}
 
 
-	public static String getMascota() {
-		return mascota;
+    public void reiniciarInteraccion(){
+      comida="";
+      ropa="";
+      
+    }
+
+
+	public static int getMover() {
+		return mover;
 	}
 
-
-	public static void setMascota(String mascota) {
-		Tablero.mascota = mascota;
+    public static void setMover(int mover) {
+		Tablero.mover = mover;
 	}
 
-
+    public static int getEnergia() {
+		return energia;
+	}
+	
+    public static void setEnergia(int energia) {
+		Tablero.energia = energia;
+	}
 }
