@@ -43,16 +43,9 @@ r.fillRect(285, 320, 5, 10);
 r.setColor(Color.cyan);
 r.fillOval(300, 250, 20, 60);
 r.fillOval(175, 250, 20, 60);
-//Botones
-r.setColor(Color.black);
-r.fillOval(245, 250, 15, 15);
-r.fillOval(245, 280, 15, 15);
-r.fillOval(245, 310, 15, 15);
-r.fillOval(245, 340, 15, 15);
-//Pies
-r.setColor(Color.black);
-r.fillOval(150, 370, 90, 40);
-r.fillOval(260, 370, 90, 40);
+
+
+
 
   }
 
