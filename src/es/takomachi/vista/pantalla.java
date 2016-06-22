@@ -37,7 +37,7 @@ public class pantalla extends JFrame implements ActionListener {
     static private JButton guardar;
     static private JButton interaccion;
     static double temperatura_p;
-    static int peso_p;
+    static double peso_p;
     static 	ButtonGroup grupo;
     static JFrame ventana;
     

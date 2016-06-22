@@ -18,7 +18,7 @@ public class Tablero implements ActionListener{
 	public static double temperatura;
 	public static int mover;
 	public static int energia;
-	public static int peso;
+	public static double peso;
 	public static String ropa;
 	 public Tablero(String nombre, String mascota){
 	  timer=new Timer(40,this);

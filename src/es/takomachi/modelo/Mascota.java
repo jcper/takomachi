@@ -3,16 +3,16 @@ package es.takomachi.modelo;
 public class Mascota {
 	
     private   String  nombre;                       
-    private   int     peso;                        
+    private   double    peso;                        
     private   String  ropa;
-    private   Double   temperatura;
+    private   double   temperatura;
     private    int    energia;
     private    int    posicion;
 
     public Mascota(String Nombre){
     	
     this.nombre=Nombre;
-    this.peso=15;
+    this.peso=15.0;
     this.ropa="0";
     this.temperatura=19.5;
     this.energia=100;
@@ -35,11 +35,11 @@ public class Mascota {
     	this.ropa=ropa;
     }
     
-    public  int getPeso(){
+    public  double getPeso(){
     	return peso;
     }
     
-    public  void SetPeso(int peso){
+    public  void SetPeso(double peso){
     	this.peso=peso;
     }
  
