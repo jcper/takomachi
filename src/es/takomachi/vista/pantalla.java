@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.event.ChangeEvent;
+
+import es.takomachi.controller.Tablero;
 
 
 public class pantalla extends JFrame implements ActionListener {
@@ -36,27 +39,26 @@ public class pantalla extends JFrame implements ActionListener {
     static double temperatura_p;
     static int peso_p;
     static 	ButtonGroup grupo;
-    
+    static JFrame ventana;
     
     
     public pantalla(){
-   temperatura_p=19.5;
-   peso_p=10;
-   temperatura=new JLabel ("Temperatura:"+temperatura_p+"º");
+   temperatura_p=Tablero.temperatura;
+   peso_p=Tablero.peso;
+   temperatura=new JLabel ("Temperatura: "+String.valueOf(temperatura_p)+"º");
+   
    TipoMascota=new JLabel("TIPO MASCOTA");
-   
    Comer=new JLabel("COMER");
-   
    Espacio=new JLabel("");
    Quitar_Poner=new JLabel("QUITAR/PONER ROPA");
    Mover=new JLabel("MOVER EJE X");
   
    energia=new JProgressBar();
-   energia.setString("ENERGIA 100%");
-   energia.setValue(100);
+   energia.setString("Energia 100%");
+   energia.setValue(Tablero.getEnergia());
    energia.setStringPainted(true);
    nombre=new JTextField("nombre",10);
-   peso=new JLabel("Peso:"+peso_p+"kg");
+   peso=new JLabel("Peso: "+String.valueOf(peso_p)+"kg");
    tipomascotaFoca=new JRadioButton("Foca");
    tipomascotaPerro=new JRadioButton("Perro");
    tipomascotaGato=new JRadioButton("Gato");
@@ -68,6 +70,9 @@ public class pantalla extends JFrame implements ActionListener {
    panel.add(tipomascotaPerro);
    panel.add(tipomascotaGato);
    panel.add(tipomascotaFoca);
+   tipomascotaGato.addActionListener(this);
+   tipomascotaPerro.addActionListener(this);
+   tipomascotaFoca.addActionListener(this);
    comer=new JComboBox();
    comer.setSize(25,10);
    comer.addItem("");
@@ -76,10 +81,8 @@ public class pantalla extends JFrame implements ActionListener {
    comer.addItem("Langosta");
    ropa=new JComboBox();
    ropa.addItem("");
-   ropa.addItem("Poner Camiseta");
-   ropa.addItem("Poner Gorro");
-   ropa.addItem("Quitar Camiseta");
-   ropa.addItem("Quitar Gorro");
+   ropa.addItem("Camiseta");
+   ropa.addItem("Gorro");
    mover=new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
    mover.setMinorTickSpacing(1);
    mover.setMajorTickSpacing(5);
@@ -93,7 +96,8 @@ public class pantalla extends JFrame implements ActionListener {
    salir.addActionListener(this);//Le añado el mismo evento con el operador this.
    interaccion=new JButton("EJECUTAR INTERACCION");
    interaccion.setBackground(Color.cyan);
-   JFrame ventana = new JFrame("Pantalla");
+   interaccion.addActionListener(this);
+    ventana = new JFrame("Pantalla");
    JPanel Pestado=new JPanel(new FlowLayout(FlowLayout.CENTER,120,10));
      Pestado.add(temperatura);
      Pestado.add(energia);
@@ -104,14 +108,14 @@ public class pantalla extends JFrame implements ActionListener {
      Pmascota.add(TipoMascota);
      Pmascota.add(panel);
   JPanel Pcomer=new JPanel(new FlowLayout(FlowLayout.CENTER,60,10));
-         Pcomer.add(Comer);
-         Pcomer.add(comer);
+         Pcomer.add(Comer).setVisible(false);
+         Pcomer.add(comer).setVisible(false);
   JPanel Propa=new JPanel(new FlowLayout(FlowLayout.CENTER,40,10));
-         Propa.add(Quitar_Poner);
-         Propa.add(ropa);
+         Propa.add(Quitar_Poner).setVisible(false);
+         Propa.add(ropa).setVisible(false);
   JPanel Pmover=new JPanel(new FlowLayout(FlowLayout.CENTER,40,10));
-         Pmover.add(Mover);
-         Pmover.add(mover);
+         Pmover.add(Mover).setVisible(false);
+         Pmover.add(mover).setVisible(false);
         Pinteraccion.setLayout(new BoxLayout(Pinteraccion,BoxLayout. Y_AXIS));
         Pinteraccion.add(Pmascota);
     	Pinteraccion.add(Pcomer);
@@ -141,7 +145,8 @@ public class pantalla extends JFrame implements ActionListener {
 		ventana.add(Pjuego,BorderLayout.EAST);
 		ventana.add(Paccion,BorderLayout.SOUTH);
 		ventana.add(Pinteraccion,BorderLayout.WEST);
-		ventana.add(new Lienzoperro(),BorderLayout.CENTER);
+	
+		
 		//ventana.setSize(400,600);	
 		//ventana.pack();
 		ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -161,9 +166,58 @@ public class pantalla extends JFrame implements ActionListener {
 		 JFrame miventana = new JFrame("Panel");
 		if(fuente==cargar){
 			
-		JOptionPane.showMessageDialog(miventana, "He manejado un evento de forma exitosa!!", "Titulo cargar juego",
+		JOptionPane.showMessageDialog(miventana, "Vamos a jugar dale de comer a tu mascotara y ponle a la ropa,"
+				+ " pulsa el boton interaccion  despues de ejecutar una accion", "Titulo cargar juego",
 		                 JOptionPane.WARNING_MESSAGE);
-			
+		
+		if (tipomascotaPerro.isSelected()){
+			ventana.add(new Lienzoperro(),BorderLayout.CENTER);
+			comer.setVisible(true);
+			Comer.setVisible(true);
+			Quitar_Poner.setVisible(true);
+	        ropa.setVisible(true);
+	        Mover.setVisible(true);
+	        mover.setVisible(true);
+	        new Tablero(nombre.getText(),"perro");
+	        temperatura_p=Tablero.temperatura;
+	        peso_p=Tablero.peso;
+	        System.out.println("peso"+peso_p);
+	        System.out.println("temperatura_p"+temperatura_p);
+	        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
+	        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
+	        
+		  }
+			if(tipomascotaGato.isSelected()){
+			  ventana.add(new Lienzogato(),BorderLayout.CENTER);
+				comer.setVisible(true);
+				Comer.setVisible(true);
+				Quitar_Poner.setVisible(true);
+		        ropa.setVisible(true);
+		        Mover.setVisible(true);
+		        mover.setVisible(true);
+		        new Tablero(nombre.getText(),"gato");
+		        temperatura_p=Tablero.temperatura;
+		        peso_p=Tablero.peso;
+		        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
+		        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
+			}
+			if(tipomascotaFoca.isSelected()){
+			   ventana.add(new Lienzofoca(),BorderLayout.CENTER);
+				comer.setVisible(true);
+				Comer.setVisible(true);
+				Quitar_Poner.setVisible(true);
+		        ropa.setVisible(true);
+		        Mover.setVisible(true);
+		        mover.setVisible(true);
+		        new Tablero(nombre.getText(),"foca");
+		        temperatura_p=Tablero.temperatura;
+		        peso_p=Tablero.peso;
+		        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
+		        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
+			}
+		
+		
+		
 			
 		}else if(fuente==guardar){
 			
@@ -171,20 +225,27 @@ public class pantalla extends JFrame implements ActionListener {
 	                 JOptionPane.WARNING_MESSAGE);
 			
 		}else if(fuente==salir){
-			
-			JOptionPane.showMessageDialog(miventana, "He manejado un evento de forma exitosa!!", "Titulo salir juego",
-	                 JOptionPane.WARNING_MESSAGE);
-			
+		    System.exit(0);
+		}else if(fuente==interaccion){
+			Tablero.comida=(String) comer.getSelectedItem();
+			System.out.println("comida"+Tablero.comida);
+			Tablero.ropa=(String) ropa.getSelectedItem();
+			System.out.println("ropa"+Tablero.ropa);
+			Tablero.mover=(int) mover.getExtent();
+			temperatura_p=Tablero.temperatura;
+		    peso_p=Tablero.peso;
+		    temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
+		    peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
 		}else{
 			
-			JOptionPane.showMessageDialog(miventana, "No he manejado un evento de forma exitosa!!", "Titulo error",
+			JOptionPane.showMessageDialog(miventana, "Por favor pulsa el boton Cargar juego", "Inicio Juego",
 	                 JOptionPane.WARNING_MESSAGE);
 			
 		}
 		
 		
 	}
-    
-    
+	
+	
     
 }

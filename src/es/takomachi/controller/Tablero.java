@@ -7,34 +7,42 @@ import javax.swing.Timer;
 import es.takomachi.modelo.Foca;
 import es.takomachi.modelo.Gato;
 import es.takomachi.modelo.Perro;
+import es.takomachi.vista.pantalla;
 
 public class Tablero implements ActionListener{
 	public Timer timer;
 	private static Foca foca;
 	private static Gato gato;
 	private static Perro perro;
-	private static String comida;
-	private static double temperatura;
-	private static int mover;
-	private static int energia;
-	private static String ropa;
+	public static String comida;
+	public static double temperatura;
+	public static int mover;
+	public static int energia;
+	public static int peso;
+	public static String ropa;
 	 public Tablero(String nombre, String mascota){
 	  timer=new Timer(40,this);
+	  timer.start();
 	  if(mascota.equals("foca")){
 	  setFoca(new Foca(nombre));
 	  temperatura=foca.getTemperatura();
+	  peso=foca.getPeso();
+	  System.out.println("temperatura"+foca.getTemperatura());
 	  setEnergia(foca.getEnergia());
 	  setMover(foca.getPosicion());
 	  }
 	  if(mascota.equals("perro")){
 		  setPerro(new Perro(nombre));
 		  temperatura=perro.getTemperatura();
+		  peso=perro.getPeso();
+		  System.out.println("temperatura"+perro.getTemperatura());
 		  setEnergia(perro.getEnergia());
 		  setMover(perro.getPosicion());
 	   }
 	  if(mascota.equals("gato")){
 		 setGato(new Gato(nombre));
 		  temperatura=gato.getTemperatura();
+		  peso=gato.getPeso();
 		  setEnergia(gato.getEnergia());
 		  setMover(gato.getPosicion());
 	  }
@@ -54,18 +62,54 @@ public class Tablero implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(!comida.equals("") ){
+			if(foca!=null){
 		  foca.DarComer(comida);
+		  peso=foca.getPeso();
+		  
+			}
+		   if(gato!=null){
 		  gato.DarComer(comida);
+		  peso=gato.getPeso();
+		    }
+		  if(perro!=null){
 		  perro.DarComer(comida);
+		  peso=perro.getPeso();
+		   }
 		}
-		if(temperatura <=19){
+		
+		if(temperatura <19){
+	    if(foca!=null){
 		foca.PonerRopa(ropa);
+		 temperatura=foca.getTemperatura();
+	    }
+	    if(gato!=null){
 		gato.PonerRopa(ropa);
+		 temperatura=gato.getTemperatura();
+	    }
+	    if(perro!=null){
 		perro.PonerRopa(ropa);
+		 temperatura=perro.getTemperatura();
+	     }
 		}
-		reiniciarInteraccion();
-	 }
+		if(temperatura >=19){
+		    if(foca!=null){
+			foca.QuitarRopa(ropa);
+			 temperatura=foca.getTemperatura();
+		    }
+		    if(gato!=null){
+			gato.QuitarRopa(ropa);
+			 temperatura=gato.getTemperatura();
+		    }
+		    if(perro!=null){
+			perro.QuitarRopa(ropa);
+			 temperatura=perro.getTemperatura();
+		    }
+	    
+		 }
+		 reiniciarInteraccion();
+	  }
 
 	public static Perro getPerro() {
 		return perro;
