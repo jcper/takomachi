@@ -239,7 +239,6 @@ public class pantalla extends JFrame implements ActionListener {
 		    peso_p=Tablero.peso;
 		    temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
 		    peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
-		    mover.;
 		    ropa.setSelectedIndex(0);
 		    comer.setSelectedIndex(0);
 		    

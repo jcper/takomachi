@@ -45,11 +45,11 @@ public class Perro extends Mascota implements interaccion{
 	@Override
 	public void Moverse(int x) {
 	   this.SetPosicion(this.getPosicion()+x);
-	   int diferencia=50-x;// posicion inicial(50)-x
-	   double perdida_peso=diferencia*0.25;
-	   int perdida_energia=diferencia*2;
-	   this.SetPeso(this.getPeso()-perdida_peso);
-	   this.SetEnergia(getEnergia()-perdida_energia);
+	   int diferencia=5-x;// posicion inicial(5)-x
+	   double perdida_peso=-diferencia*0.25;
+	   int perdida_energia=-diferencia*1;
+	   this.SetPeso(this.getPeso()-(perdida_peso));
+	   this.SetEnergia(getEnergia()-(perdida_energia));
 	}
 
 }

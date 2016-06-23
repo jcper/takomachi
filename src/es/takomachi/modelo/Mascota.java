@@ -16,7 +16,7 @@ public class Mascota {
     this.ropa="0";
     this.temperatura=19.5;
     this.energia=100;
-    this.posicion=50;
+    this.posicion=5;
     }
    
     public String getNombre(){

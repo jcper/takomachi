@@ -48,6 +48,7 @@ public class Tablero implements ActionListener{
 	  }
 	  comida="";
 	  ropa="";
+	  
 	
 	 }
 
@@ -135,15 +136,24 @@ public class Tablero implements ActionListener{
 		   }
 	    
 		 reiniciarInteraccion();
-		  if(foca!=null && foca.getPosicion()!=50){
-			 foca.Moverse(mover); 
+		  if(foca!=null && mover!=5){
+			 foca.Moverse(mover);
+			 peso=foca.getPeso();
+			 energia=foca.getEnergia();
+			 mover=5;
 		  }
-		  if(gato!=null && gato.getPosicion()!=50){
-				 gato.Moverse(mover); 
+		  if(gato!=null && mover!=5){
+			gato.Moverse(mover);
+			peso=gato.getPeso();
+			energia=gato.getEnergia();
+			mover=5;	 
 		  }
-		  if(perro!=null && perro.getPosicion()!=50){
-				 perro.Moverse(mover); 
-		  }
+		  if(perro!=null && mover!=5){
+			 perro.Moverse(mover);
+			 peso=perro.getPeso();
+			 energia=perro.getEnergia();
+			 mover=5;
+		 }
 	  }
 
 	public static Perro getPerro() {
