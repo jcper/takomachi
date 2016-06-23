@@ -79,36 +79,71 @@ public class Tablero implements ActionListener{
 		   }
 		}
 		
-		if(temperatura <19){
+		if(!ropa.equals("")){
+		
 	    if(foca!=null){
+	    if(Double.compare(foca.getTemperatura(),19.5)<= 0){
 		foca.PonerRopa(ropa);
 		 temperatura=foca.getTemperatura();
+		 ropa="";
+	    }
+		 System.out.println("t1"+temperatura);
 	    }
 	    if(gato!=null){
+	    if(Double.compare(gato.getTemperatura(),19.5)<= 0){
 		gato.PonerRopa(ropa);
 		 temperatura=gato.getTemperatura();
-	    }
+		 ropa="";
+	      }
+		 System.out.println("t1"+temperatura);
+	   }
 	    if(perro!=null){
+	    if(Double.compare(perro.getTemperatura(),19.5)<= 0){
 		perro.PonerRopa(ropa);
 		 temperatura=perro.getTemperatura();
-	     }
-		}
-		if(temperatura >=19){
+		 ropa="";
+	    }
+		 System.out.println("t1"+temperatura);
+	  }
+	
 		    if(foca!=null){
+		   if(Double.compare(foca.getTemperatura(),19.5)> 0){
 			foca.QuitarRopa(ropa);
 			 temperatura=foca.getTemperatura();
+			  ropa="";
+			  }
+		     System.out.println("t1"+temperatura);
 		    }
 		    if(gato!=null){
+		   if(Double.compare(gato.getTemperatura(),19.5)> 0){
 			gato.QuitarRopa(ropa);
-			 temperatura=gato.getTemperatura();
+			temperatura=gato.getTemperatura();
+			 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 ropa="";
+			 }
+		     System.out.println("t1"+temperatura);
 		    }
 		    if(perro!=null){
+		    if(Double.compare(perro.getTemperatura(),19.5)> 0){
 			perro.QuitarRopa(ropa);
-			 temperatura=perro.getTemperatura();
+			temperatura=perro.getTemperatura();
+			pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º"); 
+			 ropa="";
+		     }
+		    System.out.println("t1"+temperatura);
 		    }
+		   }
 	    
-		 }
 		 reiniciarInteraccion();
+		  if(foca!=null && foca.getPosicion()!=50){
+			 foca.Moverse(mover); 
+		  }
+		  if(gato!=null && gato.getPosicion()!=50){
+				 gato.Moverse(mover); 
+		  }
+		  if(perro!=null && perro.getPosicion()!=50){
+				 perro.Moverse(mover); 
+		  }
 	  }
 
 	public static Perro getPerro() {

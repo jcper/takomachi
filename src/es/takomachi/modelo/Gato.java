@@ -45,8 +45,11 @@ public class Gato extends Mascota implements interaccion{
 	@Override
 	public void Moverse(int x) {
 	   this.SetPosicion(this.getPosicion()+x);
-	   this.SetPeso(this.getPeso()-0.25);
-	   this.SetEnergia(getEnergia()-2);
+	   int diferencia=50-x;// posicion inicial(50)-x
+	   double perdida_peso=diferencia*0.25;
+	   int perdida_energia=diferencia*2;
+	   this.SetPeso(this.getPeso()-perdida_peso);
+	   this.SetEnergia(getEnergia()-perdida_energia);
 		
 	}
 
