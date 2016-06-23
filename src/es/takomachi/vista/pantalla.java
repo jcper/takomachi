@@ -17,25 +17,25 @@ import es.takomachi.controller.Tablero;
 
 public class pantalla extends JFrame implements ActionListener {
 	
-	static public JLabel temperatura;
-	static public JProgressBar energia;
-	static public JTextField nombre;
-	static public JLabel peso;
-    static public JRadioButton tipomascotaFoca;
-    static public JRadioButton tipomascotaPerro;
-    static public JRadioButton tipomascotaGato;
-    static public JLabel TipoMascota;
-    static public JLabel Comer;
-    static public JLabel Quitar_Poner;
-    static public JLabel Espacio;
-    static public JLabel Mover;
-    static public JComboBox comer;
-    static public JComboBox ropa;
-    static public JSlider mover;
-    static public JButton cargar;
-    static public JButton salir;
-    static public JButton guardar;
-    static public JButton interaccion;
+	public static  JLabel temperatura;
+	static  JProgressBar energia;
+	static  JTextField nombre;
+	static  JLabel peso;
+    static  JRadioButton tipomascotaFoca;
+    static  JRadioButton tipomascotaPerro;
+    static  JRadioButton tipomascotaGato;
+    static  JLabel TipoMascota;
+    static  JLabel Comer;
+    static  JLabel Quitar_Poner;
+    static  JLabel Espacio;
+    static  JLabel Mover;
+    static  JComboBox comer;
+    static  JComboBox ropa;
+    static  JSlider mover;
+    static  JButton cargar;
+    static  JButton salir;
+    static  JButton guardar;
+    static  JButton interaccion;
     static double temperatura_p;
     static double peso_p;
     static 	ButtonGroup grupo;
@@ -214,7 +214,6 @@ public class pantalla extends JFrame implements ActionListener {
 		        peso_p=Tablero.peso;
 		        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
 		        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
-		        
 			}
 		
 		
@@ -227,22 +226,16 @@ public class pantalla extends JFrame implements ActionListener {
 			
 		}else if(fuente==salir){
 		    System.exit(0);
-		    
 		}else if(fuente==interaccion){
 			Tablero.comida=(String) comer.getSelectedItem();
 			System.out.println("comida"+Tablero.comida);
 			Tablero.ropa=(String) ropa.getSelectedItem();
 			System.out.println("ropa"+Tablero.ropa);
-			Tablero.mover=(int) mover.getValue();
-			System.out.println("mover"+Tablero.mover);
+			Tablero.mover=(int) mover.getExtent();
 			temperatura_p=Tablero.temperatura;
 		    peso_p=Tablero.peso;
 		    temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
 		    peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
-		    ropa.setSelectedIndex(0);
-		    comer.setSelectedIndex(0);
-		    
-		    
 		}else{
 			
 			JOptionPane.showMessageDialog(miventana, "Por favor pulsa el boton Cargar juego", "Inicio Juego",
