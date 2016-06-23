@@ -20,6 +20,10 @@ public class Tablero implements ActionListener{
 	public static int energia;
 	public static double peso;
 	public static String ropa;
+	private static int ropapuestaPerro;
+	private static int ropapuestaGato;
+	private static int ropapuestaFoca;
+	
 	 public Tablero(String nombre, String mascota){
 	  timer=new Timer(40,this);
 	  timer.start();
@@ -48,7 +52,9 @@ public class Tablero implements ActionListener{
 	  }
 	  comida="";
 	  ropa="";
-	  
+      ropapuestaPerro=0;
+	  ropapuestaGato=0;
+	  ropapuestaFoca=0;
 	
 	 }
 
@@ -64,97 +70,117 @@ public class Tablero implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(!comida.equals("") ){
-			if(foca!=null){
+		if(!Tablero.comida.equals("")){
+			if(foca!=null ){
 		  foca.DarComer(comida);
-		  peso=foca.getPeso();
-		  
-			}
+		  Tablero.peso=foca.getPeso();
+		  Tablero.energia=foca.getEnergia();
+		  pantalla.energia.setValue(Tablero.energia);
+		  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
+		  Tablero.comida="";
+		  System.out.println("foca"+peso);
+		  }
 		   if(gato!=null){
 		  gato.DarComer(comida);
-		  peso=gato.getPeso();
-		    }
+		  Tablero.peso=gato.getPeso();
+		  Tablero.energia=gato.getEnergia();
+		  pantalla.energia.setValue(Tablero.energia);
+		  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
+		  Tablero.comida="";
+		  System.out.println("gato"+peso);
+		   }
 		  if(perro!=null){
 		  perro.DarComer(comida);
-		  peso=perro.getPeso();
+		  Tablero.peso=perro.getPeso();
+		  Tablero.energia=perro.getEnergia();
+		  pantalla.energia.setValue(Tablero.energia);
+		  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
+		  Tablero.comida="";
+		  System.out.println("perro"+peso);
 		   }
 		}
 		
-		if(!ropa.equals("")){
+	if(!ropa.equals("")){
 		
 	    if(foca!=null){
-	    if(Double.compare(foca.getTemperatura(),19.5)<= 0){
-		foca.PonerRopa(ropa);
-		 temperatura=foca.getTemperatura();
-		 ropa="";
-	    }
-		 System.out.println("t1"+temperatura);
-	    }
-	    if(gato!=null){
-	    if(Double.compare(gato.getTemperatura(),19.5)<= 0){
-		gato.PonerRopa(ropa);
-		 temperatura=gato.getTemperatura();
-		 ropa="";
-	      }
-		 System.out.println("t1"+temperatura);
-	   }
-	    if(perro!=null){
-	    if(Double.compare(perro.getTemperatura(),19.5)<= 0){
-		perro.PonerRopa(ropa);
-		 temperatura=perro.getTemperatura();
-		 ropa="";
-	    }
-		 System.out.println("t1"+temperatura);
-	  }
-	
-		    if(foca!=null){
-		   if(Double.compare(foca.getTemperatura(),19.5)> 0){
-			foca.QuitarRopa(ropa);
+	      if( foca.PonerRopa(ropa) && ropapuestaFoca<2){
+			 ropapuestaFoca++;
 			 temperatura=foca.getTemperatura();
-			  ropa="";
-			  }
-		     System.out.println("t1"+temperatura);
-		    }
-		    if(gato!=null){
-		   if(Double.compare(gato.getTemperatura(),19.5)> 0){
-			gato.QuitarRopa(ropa);
-			temperatura=gato.getTemperatura();
 			 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
-			 ropa="";
-			 }
-		     System.out.println("t1"+temperatura);
-		    }
-		    if(perro!=null){
-		    if(Double.compare(perro.getTemperatura(),19.5)> 0){
-			perro.QuitarRopa(ropa);
-			temperatura=perro.getTemperatura();
-			pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º"); 
-			 ropa="";
-		     }
-		    System.out.println("t1"+temperatura);
-		    }
-		   }
+		 }
+		 if( foca.QuitarRopa(ropa) && ropapuestaFoca>0){
+			 ropapuestaFoca--;
+			 temperatura=foca.getTemperatura();
+			 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+		 }
+         ropa="";
+		 System.out.println("foca"+temperatura);
+	   }
+	    if(gato!=null){
 	    
+	    	if( gato.PonerRopa(ropa) && ropapuestaGato<2){
+				 ropapuestaGato++;
+				 temperatura=gato.getTemperatura();
+				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 }
+			 if( gato.QuitarRopa(ropa) && ropapuestaGato>0){
+				 ropapuestaGato--;
+				 temperatura=gato.getTemperatura();
+				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 }
+		 ropa="";
+		 System.out.println("gato"+temperatura);
+	    }
+		if(perro!=null){
+			 if( perro.PonerRopa(ropa) && ropapuestaPerro<2){
+				 ropapuestaPerro++;
+				 temperatura=perro.getTemperatura();
+				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 }
+			 if( perro.QuitarRopa(ropa) && ropapuestaPerro>0){
+				 ropapuestaPerro--;
+				 temperatura=perro.getTemperatura();
+				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 }
+		 ropa="";
+		 System.out.println("perro"+temperatura);
+	    }
+      }
+	
 		 reiniciarInteraccion();
-		  if(foca!=null && mover!=5){
+		  if(mover!=0){
+		  if(foca!=null && foca.getPosicion()!=mover){
 			 foca.Moverse(mover);
 			 peso=foca.getPeso();
 			 energia=foca.getEnergia();
-			 mover=5;
+			 Tablero.peso=foca.getPeso();
+			 Tablero.energia=foca.getEnergia();
+			  pantalla.energia.setValue(Tablero.energia);
+			  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
+			 mover=0;
 		  }
-		  if(gato!=null && mover!=5){
+		  if(gato!=null && gato.getPosicion()!=mover){
 			gato.Moverse(mover);
 			peso=gato.getPeso();
 			energia=gato.getEnergia();
-			mover=5;	 
+			Tablero.peso=gato.getPeso();
+			  Tablero.energia=gato.getEnergia();
+			  pantalla.energia.setValue(Tablero.energia);
+			  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
+			mover=0;	 
 		  }
-		  if(perro!=null && mover!=5){
+		  if(perro!=null && perro.getPosicion()!=mover){
 			 perro.Moverse(mover);
 			 peso=perro.getPeso();
 			 energia=perro.getEnergia();
-			 mover=5;
+			 Tablero.peso=perro.getPeso();
+			  Tablero.energia=perro.getEnergia();
+			  pantalla.energia.setValue(Tablero.energia);
+			  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
+			 mover=0;
 		 }
 	  }
+	}
 
 	public static Perro getPerro() {
 		return perro;

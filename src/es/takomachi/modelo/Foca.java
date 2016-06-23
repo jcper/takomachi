@@ -16,46 +16,46 @@ public void DarComer(String comida) {
 }
 
 @Override
-public void PonerRopa(String Ropa) {
-	if(Ropa.equals("Gorro")){
+public boolean PonerRopa(String Ropa) {
+	boolean puesto=false;
+	if(Ropa.equals("Gorro1")){
 		this.SetTemperatura(this.getTemperatura()+1.0);
-		
+		puesto=true;
 	 }
 	
-	if(Ropa.equals("Camiseta")){
+	if(Ropa.equals("Camiseta1")){
 		this.SetTemperatura(this.getTemperatura()+1.0);
+		puesto=true;
 	 }
-	
+	return puesto;
 }
 
 @Override
-public void QuitarRopa(String Ropa) {
-	
-	if(Ropa.equals("Gorro")){
+public boolean QuitarRopa(String Ropa) {
+	boolean puesto=false;
+	if(Ropa.equals("Gorro0")){
 		this.SetTemperatura(this.getTemperatura()-1.0);
+		puesto=true;
 	 }
 	
-	if(Ropa.equals("Camiseta")){
+	if(Ropa.equals("Camiseta0")){
 		this.SetTemperatura(this.getTemperatura()-1.0);
+		puesto=true;
 	 }
-	
+	return puesto;
 }
 
 @Override
 public void Moverse(int x) {
-   this.SetPosicion(this.getPosicion()+x);
-   int diferencia=5-x;// posicion inicial(5)-x
+   int diferencia=this.getPosicion()-x;// posicion inicial(5)-x
+    if(x<this.getPosicion()){
+	   diferencia=x-this.getPosicion();
+      }
+   this.SetPosicion(x);
    double perdida_peso=-diferencia*0.25;
-   System.out.println(perdida_peso);
    int perdida_energia=-diferencia*1;
    this.SetPeso(this.getPeso()-(perdida_peso));
-   this.SetEnergia(this.getEnergia()-(perdida_energia));
-   
-}
-
-	
-	
-	
-	
+   this.SetEnergia(getEnergia()-(perdida_energia));
+    }
 
 }

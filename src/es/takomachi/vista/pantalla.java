@@ -18,29 +18,31 @@ import es.takomachi.controller.Tablero;
 public class pantalla extends JFrame implements ActionListener {
 	
 	public static  JLabel temperatura;
-	static  JProgressBar energia;
-	static  JTextField nombre;
-	static  JLabel peso;
-    static  JRadioButton tipomascotaFoca;
-    static  JRadioButton tipomascotaPerro;
-    static  JRadioButton tipomascotaGato;
-    static  JLabel TipoMascota;
-    static  JLabel Comer;
-    static  JLabel Quitar_Poner;
-    static  JLabel Espacio;
-    static  JLabel Mover;
-    static  JComboBox comer;
-    static  JComboBox ropa;
-    static  JSlider mover;
-    static  JButton cargar;
-    static  JButton salir;
-    static  JButton guardar;
-    static  JButton interaccion;
-    static double temperatura_p;
-    static double peso_p;
-    static 	ButtonGroup grupo;
-    static JFrame ventana;
-    
+	public static  JProgressBar energia;
+	public static  JTextField nombre;
+	public static  JLabel peso;
+    public static  JRadioButton tipomascotaFoca;
+    public static  JRadioButton tipomascotaPerro;
+    public static  JRadioButton tipomascotaGato;
+    public static  JLabel TipoMascota;
+    public static  JLabel Comer;
+    public static  JLabel Quitar_Poner;
+    public static  JLabel Espacio;
+    public static  JLabel Mover;
+    public static  JComboBox comer;
+    public static  JComboBox ropa;
+    public static  JSlider mover;
+    public static  JButton cargar;
+    public static  JButton salir;
+    public static  JButton guardar;
+    public static  JButton interaccion;
+    public static double temperatura_p;
+    public static double peso_p;
+    public static 	ButtonGroup grupo;
+    public static JFrame ventana;
+    public static ImageIcon icon;
+    public static JLabel DesRopaPoner;
+    public static JLabel DesRopaQuitar;
     
     public pantalla(){
    temperatura_p=Tablero.temperatura;
@@ -52,10 +54,11 @@ public class pantalla extends JFrame implements ActionListener {
    Espacio=new JLabel("");
    Quitar_Poner=new JLabel("QUITAR/PONER ROPA");
    Mover=new JLabel("MOVER EJE X");
-  
+   DesRopaPoner=new JLabel("Poner Ropa: Camiseta1,Gorro1");
+   DesRopaQuitar=new JLabel("Quitar Ropa: Camiseta0,Gorro0");
    energia=new JProgressBar();
-   energia.setString("Energia 100%");
-   energia.setValue(Tablero.getEnergia());
+   energia.setString("Energia");
+   energia.setValue(100);
    energia.setStringPainted(true);
    nombre=new JTextField("nombre",10);
    peso=new JLabel("Peso: "+String.valueOf(peso_p)+"kg");
@@ -81,8 +84,10 @@ public class pantalla extends JFrame implements ActionListener {
    comer.addItem("Langosta");
    ropa=new JComboBox();
    ropa.addItem("");
-   ropa.addItem("Camiseta");
-   ropa.addItem("Gorro");
+   ropa.addItem("Camiseta1");//Poner camiseta
+   ropa.addItem("Gorro1");//Poner gorro
+   ropa.addItem("Camiseta0");//Quitar camiseta
+   ropa.addItem("Gorro0");//Quitar gorro
    mover=new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
    mover.setMinorTickSpacing(1);
    mover.setMajorTickSpacing(5);
@@ -98,6 +103,8 @@ public class pantalla extends JFrame implements ActionListener {
    interaccion.setBackground(Color.cyan);
    interaccion.addActionListener(this);
     ventana = new JFrame("Pantalla");
+    icon = createImage("images/middle.gif",
+            "a pretty but meaningless splat");
    JPanel Pestado=new JPanel(new FlowLayout(FlowLayout.CENTER,120,10));
      Pestado.add(temperatura);
      Pestado.add(energia);
@@ -113,6 +120,9 @@ public class pantalla extends JFrame implements ActionListener {
   JPanel Propa=new JPanel(new FlowLayout(FlowLayout.CENTER,40,10));
          Propa.add(Quitar_Poner).setVisible(false);
          Propa.add(ropa).setVisible(false);
+  JPanel PdesRopa=new JPanel(new FlowLayout(FlowLayout.CENTER,40,10));
+         PdesRopa.add(DesRopaPoner);
+         PdesRopa.add(DesRopaQuitar);
   JPanel Pmover=new JPanel(new FlowLayout(FlowLayout.CENTER,40,10));
          Pmover.add(Mover).setVisible(false);
          Pmover.add(mover).setVisible(false);
@@ -120,6 +130,7 @@ public class pantalla extends JFrame implements ActionListener {
         Pinteraccion.add(Pmascota);
     	Pinteraccion.add(Pcomer);
     	Pinteraccion.add(Propa);
+    	Pinteraccion.add(PdesRopa);
     	Pinteraccion.add(Pmover);
     
    JPanel Pjuego=new JPanel();
@@ -153,7 +164,12 @@ public class pantalla extends JFrame implements ActionListener {
 		ventana.setVisible(true);
     }
 
-    /***
+    private ImageIcon createImage(String string, String string2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/***
      *Con un mismo oyente manejo varias fuentes
      *como los botones cargar, guardar y salir 
      * 
@@ -226,16 +242,16 @@ public class pantalla extends JFrame implements ActionListener {
 			
 		}else if(fuente==salir){
 		    System.exit(0);
+		    
 		}else if(fuente==interaccion){
 			Tablero.comida=(String) comer.getSelectedItem();
 			System.out.println("comida"+Tablero.comida);
 			Tablero.ropa=(String) ropa.getSelectedItem();
 			System.out.println("ropa"+Tablero.ropa);
-			Tablero.mover=(int) mover.getExtent();
-			temperatura_p=Tablero.temperatura;
-		    peso_p=Tablero.peso;
-		    temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
-		    peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
+			Tablero.mover=(int) mover.getValue();
+			comer.setSelectedIndex(0);
+		    ropa.setSelectedIndex(0);
+		    System.out.println("mover: "+mover.getValue());
 		}else{
 			
 			JOptionPane.showMessageDialog(miventana, "Por favor pulsa el boton Cargar juego", "Inicio Juego",
