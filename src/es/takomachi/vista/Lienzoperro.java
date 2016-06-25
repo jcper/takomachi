@@ -20,7 +20,7 @@ public class Lienzoperro extends JPanel {
 	  accion_mover.setBounds(new Rectangle(800, 300, 50, 50));
 	  this.add(accion_mover);
 	  accion_mover.setVisible(false);
-	  accion_ponerRopa=new JLabel("Accion: Poner Ropa Prendas puestas:"+Tablero.ropapuestaFoca+" temperatura:-1º");
+	  accion_ponerRopa=new JLabel("Accion: Poner Ropa Prendas puestas:"+Tablero.ropapuestaFoca+" temperatura:+1º");
 	  accion_ponerRopa.setBounds(new Rectangle(850, 350, 200,200));
 	  this.add(accion_ponerRopa);
 	  accion_ponerRopa.setVisible(false);
