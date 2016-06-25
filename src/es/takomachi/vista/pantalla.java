@@ -56,6 +56,7 @@ public class pantalla extends JFrame implements ActionListener {
    Mover=new JLabel("MOVER EJE X");
    DesRopaPoner=new JLabel("Poner Ropa: Camiseta1,Gorro1");
    DesRopaQuitar=new JLabel("Quitar Ropa: Camiseta0,Gorro0");
+   
    energia=new JProgressBar();
    energia.setString("Energia");
    energia.setValue(100);
@@ -201,8 +202,14 @@ public class pantalla extends JFrame implements ActionListener {
 	        System.out.println("temperatura_p"+temperatura_p);
 	        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
 	        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
+	        tipomascotaGato.setVisible(false);
+	        tipomascotaGato.setEnabled(false);
+	        tipomascotaFoca.setVisible(false);
+	        tipomascotaFoca.setEnabled(false); 
 	        
-		  }
+	        
+		    
+		   }
 			if(tipomascotaGato.isSelected()){
 			  ventana.add(new Lienzogato(),BorderLayout.CENTER);
 				comer.setVisible(true);
@@ -216,6 +223,13 @@ public class pantalla extends JFrame implements ActionListener {
 		        peso_p=Tablero.peso;
 		        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
 		        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
+		        tipomascotaPerro.setVisible(false);
+		        tipomascotaPerro.setEnabled(false);
+		        tipomascotaFoca.setVisible(false);
+		        tipomascotaFoca.setEnabled(false);
+		        
+		       
+				
 			}
 			if(tipomascotaFoca.isSelected()){
 			   ventana.add(new Lienzofoca(),BorderLayout.CENTER);
@@ -230,11 +244,15 @@ public class pantalla extends JFrame implements ActionListener {
 		        peso_p=Tablero.peso;
 		        temperatura.setText("Temperatura: "+String.valueOf(temperatura_p)+"º");
 		        peso.setText("Peso: "+String.valueOf(peso_p)+"kg");
-			}
+		        tipomascotaPerro.setVisible(false);
+		        tipomascotaPerro.setEnabled(false);
+		        tipomascotaGato.setVisible(false);
+		        tipomascotaGato.setEnabled(false);
+		        
+		       
+		      }
 		
 		
-		
-			
 		}else if(fuente==guardar){
 			
 			JOptionPane.showMessageDialog(miventana, "He manejado un evento de forma exitosa!!", "Titulo guardar juego",
@@ -244,6 +262,7 @@ public class pantalla extends JFrame implements ActionListener {
 		    System.exit(0);
 		    
 		}else if(fuente==interaccion){
+			
 			Tablero.comida=(String) comer.getSelectedItem();
 			System.out.println("comida"+Tablero.comida);
 			Tablero.ropa=(String) ropa.getSelectedItem();
@@ -251,7 +270,36 @@ public class pantalla extends JFrame implements ActionListener {
 			Tablero.mover=(int) mover.getValue();
 			comer.setSelectedIndex(0);
 		    ropa.setSelectedIndex(0);
+		    
+			 if(tipomascotaFoca.isEnabled() && (Tablero.comida.equals("Leche") || Tablero.comida.equals("Carne"))){
+					Lienzofoca.accion_comer.setVisible(false);
+					Lienzofoca.accion_mover.setVisible(false);
+					Lienzofoca.accion_ponerRopa.setVisible(false);
+				    Lienzofoca.accion_quitarRopa.setVisible(false);
+				    System.out.println("enabledfoca"+Tablero.comida);
+				    Tablero.comida="";
+			      }
+			 
+			 if(tipomascotaGato.isEnabled() && (Tablero.comida.equals("Carne") || Tablero.comida.equals("Langosta"))){
+					Lienzogato.accion_comer.setVisible(false);
+					Lienzogato.accion_mover.setVisible(false);
+					Lienzogato.accion_ponerRopa.setVisible(false);
+					Lienzogato.accion_quitarRopa.setVisible(false);
+					 System.out.println("enabledGato"+Tablero.comida);
+					 Tablero.comida="";
+			  }
+			 
+			 if(tipomascotaPerro.isEnabled() && (Tablero.comida.equals("Leche") || Tablero.comida.equals("Langosta"))){
+			        Lienzoperro.accion_comer.setVisible(false);
+					Lienzoperro.accion_mover.setVisible(false);
+					Lienzoperro.accion_ponerRopa.setVisible(false);
+					Lienzoperro.accion_quitarRopa.setVisible(false);
+					System.out.println("enabledPerro"+Tablero.comida);
+					Tablero.comida="";
+			     }
+			 
 		    System.out.println("mover: "+mover.getValue());
+		    
 		}else{
 			
 			JOptionPane.showMessageDialog(miventana, "Por favor pulsa el boton Cargar juego", "Inicio Juego",

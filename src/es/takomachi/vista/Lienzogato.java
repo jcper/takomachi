@@ -3,13 +3,34 @@ package es.takomachi.vista;
 import java.awt.*;
 import javax.swing.*;
 
+import es.takomachi.controller.Tablero;
+
 
 public class Lienzogato extends JPanel {
-	
+	public static JLabel accion_mover;
+	  public static JLabel accion_ponerRopa;
+	  public static JLabel accion_quitarRopa;
+	  public static JLabel accion_comer;
     
   Lienzogato() {
 	  this.setBackground(Color.yellow);
 	  this.setBounds(0,0,100,200);
+	  accion_mover=new JLabel ("Accion: mover   peso:-0.25 kg  energia:-1%");
+	  accion_mover.setBounds(new Rectangle(800, 300, 50, 50));
+	  this.add(accion_mover);
+	  accion_mover.setVisible(false);
+	  accion_ponerRopa=new JLabel("Accion: Poner Ropa Prendas puestas:"+Tablero.ropapuestaGato+" temperatura:-1º");
+	  accion_ponerRopa.setBounds(new Rectangle(850, 350, 200,200));
+	  this.add(accion_ponerRopa);
+	  accion_ponerRopa.setVisible(false);
+	  accion_quitarRopa=new JLabel("Accion: Quitar Ropa Prendas puestas:"+Tablero.ropapuestaGato+" temperatura:-1º");
+	  accion_ponerRopa.setBounds(new Rectangle(900,400,150, 150));
+	  this.add(accion_quitarRopa);
+	  accion_quitarRopa.setVisible(false);
+	  accion_comer=new JLabel("Accion: Comer  peso:+0.50kg energia:+2%");
+	  accion_comer.setBounds(new Rectangle(950,450,200,200));
+	  accion_comer.setVisible(false);
+	  this.add(accion_comer);
   }
 
 @Override

@@ -7,6 +7,9 @@ import javax.swing.Timer;
 import es.takomachi.modelo.Foca;
 import es.takomachi.modelo.Gato;
 import es.takomachi.modelo.Perro;
+import es.takomachi.vista.Lienzofoca;
+import es.takomachi.vista.Lienzogato;
+import es.takomachi.vista.Lienzoperro;
 import es.takomachi.vista.pantalla;
 
 public class Tablero implements ActionListener{
@@ -20,9 +23,9 @@ public class Tablero implements ActionListener{
 	public static int energia;
 	public static double peso;
 	public static String ropa;
-	private static int ropapuestaPerro;
-	private static int ropapuestaGato;
-	private static int ropapuestaFoca;
+	public static int ropapuestaPerro;
+	public static int ropapuestaGato;
+	public static int ropapuestaFoca;
 	
 	 public Tablero(String nombre, String mascota){
 	  timer=new Timer(40,this);
@@ -78,6 +81,7 @@ public class Tablero implements ActionListener{
 		  pantalla.energia.setValue(Tablero.energia);
 		  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
 		  Tablero.comida="";
+		  Lienzofoca.accion_comer.setVisible(true);
 		  System.out.println("foca"+peso);
 		  }
 		   if(gato!=null){
@@ -87,7 +91,8 @@ public class Tablero implements ActionListener{
 		  pantalla.energia.setValue(Tablero.energia);
 		  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
 		  Tablero.comida="";
-		  System.out.println("gato"+peso);
+		  Lienzogato.accion_comer.setVisible(true);
+		  System.out.println("gato");
 		   }
 		  if(perro!=null){
 		  perro.DarComer(comida);
@@ -96,6 +101,7 @@ public class Tablero implements ActionListener{
 		  pantalla.energia.setValue(Tablero.energia);
 		  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
 		  Tablero.comida="";
+		  Lienzoperro.accion_comer.setVisible(true);
 		  System.out.println("perro"+peso);
 		   }
 		}
@@ -107,11 +113,13 @@ public class Tablero implements ActionListener{
 			 ropapuestaFoca++;
 			 temperatura=foca.getTemperatura();
 			 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 Lienzofoca.accion_ponerRopa.setVisible(true);
 		 }
 		 if( foca.QuitarRopa(ropa) && ropapuestaFoca>0){
 			 ropapuestaFoca--;
 			 temperatura=foca.getTemperatura();
 			 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+			 Lienzofoca.accion_quitarRopa.setVisible(true);
 		 }
          ropa="";
 		 System.out.println("foca"+temperatura);
@@ -119,14 +127,17 @@ public class Tablero implements ActionListener{
 	    if(gato!=null){
 	    
 	    	if( gato.PonerRopa(ropa) && ropapuestaGato<2){
-				 ropapuestaGato++;
+				 Tablero.ropapuestaGato++;
 				 temperatura=gato.getTemperatura();
 				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+				 Lienzogato.accion_ponerRopa.setVisible(true);
 			 }
 			 if( gato.QuitarRopa(ropa) && ropapuestaGato>0){
-				 ropapuestaGato--;
+				 Tablero.ropapuestaGato--;
 				 temperatura=gato.getTemperatura();
 				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+				 Lienzogato.accion_quitarRopa.setVisible(true);
+
 			 }
 		 ropa="";
 		 System.out.println("gato"+temperatura);
@@ -136,11 +147,13 @@ public class Tablero implements ActionListener{
 				 ropapuestaPerro++;
 				 temperatura=perro.getTemperatura();
 				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+				 Lienzoperro.accion_ponerRopa.setVisible(true);
 			 }
 			 if( perro.QuitarRopa(ropa) && ropapuestaPerro>0){
 				 ropapuestaPerro--;
 				 temperatura=perro.getTemperatura();
 				 pantalla.temperatura.setText("Temperatura: "+String.valueOf(temperatura)+"º");
+				 Lienzoperro.accion_quitarRopa.setVisible(true);
 			 }
 		 ropa="";
 		 System.out.println("perro"+temperatura);
@@ -157,7 +170,8 @@ public class Tablero implements ActionListener{
 			 Tablero.energia=foca.getEnergia();
 			  pantalla.energia.setValue(Tablero.energia);
 			  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
-			 mover=0;
+			  mover=0;
+			  Lienzofoca.accion_mover.setVisible(true);
 		  }
 		  if(gato!=null && gato.getPosicion()!=mover){
 			gato.Moverse(mover);
@@ -167,7 +181,8 @@ public class Tablero implements ActionListener{
 			  Tablero.energia=gato.getEnergia();
 			  pantalla.energia.setValue(Tablero.energia);
 			  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
-			mover=0;	 
+			mover=0;
+			 Lienzogato.accion_mover.setVisible(true);
 		  }
 		  if(perro!=null && perro.getPosicion()!=mover){
 			 perro.Moverse(mover);
@@ -178,6 +193,7 @@ public class Tablero implements ActionListener{
 			  pantalla.energia.setValue(Tablero.energia);
 			  pantalla.peso.setText("Peso: "+String.valueOf(Tablero.peso)+"kg");
 			 mover=0;
+			 Lienzoperro.accion_mover.setVisible(true);
 		 }
 	  }
 	}
